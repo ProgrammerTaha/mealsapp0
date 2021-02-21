@@ -12,6 +12,22 @@ class MealDetailsScreen extends StatelessWidget {
       child: Text(title, style: Theme.of(context).textTheme.headline6),
     );
   }
+
+  Widget list(Widget child) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(width: 1, color: Colors.grey),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      height: 150,
+      width: 300,
+      child: child,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final routeArg = ModalRoute.of(context)?.settings.arguments as Map;
@@ -21,25 +37,16 @@ class MealDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(routeArg['title']),
       ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            height: 300,
-            child: Image.network('${selectedMeal.imageUrl}', fit: BoxFit.cover),
-          ),
-          title(context,'ingredients'),
-          Container(
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(width: 1, color: Colors.grey),
-              borderRadius: BorderRadius.circular(10),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              height: 300,
+              child: Image.network('${selectedMeal.imageUrl}', fit: BoxFit.cover),
             ),
-            height: 150,
-            width: 300,
-            child: ListView.builder(
+            title(context, 'ingredients'),
+            list(ListView.builder(
               itemBuilder: (context, index) => Padding(
                 padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 child: Card(
@@ -52,35 +59,28 @@ class MealDetailsScreen extends StatelessWidget {
                 ),
               ),
               itemCount: routeArg["ingredients"].length,
-            ),
-          ),
-          title(context,'step'),
-          Container(
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            height: 150,
-            width: 300,
-            child: ListView.builder(
-              itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                child: Card(
-                  color: Theme.of(context).accentColor,
-                  child: Text(
-                    '${routeArg["steps"][index]}',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20),
+            )),
+            title(context, 'step'),
+            list(ListView.builder(
+              itemBuilder: (context, index) => Column(
+                children: [
+                  ListTile(
+                    leading: CircleAvatar(
+                      child: Text('#${index + 1}'),
+                    ),
+                    title: Text(
+                      '${routeArg["steps"][index]}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20),
+                    ),
                   ),
-                ),
+                  Divider(),
+                ],
               ),
               itemCount: routeArg["steps"].length,
-            ),
-          ),
-        ],
+            )),
+          ],
+        ),
       ),
     );
   }
