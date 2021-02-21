@@ -27,11 +27,14 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
         itemCount: categoryMeal.length,
         itemBuilder: (context, index) {
           return MealItem(
+            id: categoryMeal[index].id,
             imageUrl: categoryMeal[index].imageUrl,
             title: categoryMeal[index].title,
             duration: categoryMeal[index].duration,
             complexity: categoryMeal[index].complexity,
             affordability: categoryMeal[index].affordability,
+            ingredients: categoryMeal[index].ingredients,
+            steps: categoryMeal[index].steps,
           );
         },
       ),
