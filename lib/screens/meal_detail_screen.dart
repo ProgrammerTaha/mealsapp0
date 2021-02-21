@@ -1,9 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meal_app0/dummy_data.dart';
 
 class MealDetailsScreen extends StatelessWidget {
   static final routName = '/MealDetailsScreen';
 
+  Widget title(BuildContext context, String title) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      alignment: Alignment.center,
+      child: Text(title, style: Theme.of(context).textTheme.headline6),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     final routeArg = ModalRoute.of(context)?.settings.arguments as Map;
@@ -13,18 +21,65 @@ class MealDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(routeArg['title']),
       ),
-      body: Column(
+      body: ListView(
         children: <Widget>[
           Container(
             width: double.infinity,
             height: 300,
-            child: Image.network(
-              '${selectedMeal.imageUrl}',
-              fit: BoxFit.cover,
+            child: Image.network('${selectedMeal.imageUrl}', fit: BoxFit.cover),
+          ),
+          title(context,'ingredients'),
+          Container(
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(width: 1, color: Colors.grey),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            height: 150,
+            width: 300,
+            child: ListView.builder(
+              itemBuilder: (context, index) => Padding(
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Card(
+                  color: Theme.of(context).accentColor,
+                  child: Text(
+                    '${routeArg["ingredients"][index]}',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ),
+              itemCount: routeArg["ingredients"].length,
             ),
           ),
-          Text('${routeArg["ingredients"]}'),
-          Text('${routeArg["steps"]}'),
+          title(context,'step'),
+          Container(
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            height: 150,
+            width: 300,
+            child: ListView.builder(
+              itemBuilder: (context, index) => Padding(
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Card(
+                  color: Theme.of(context).accentColor,
+                  child: Text(
+                    '${routeArg["steps"][index]}',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ),
+              itemCount: routeArg["steps"].length,
+            ),
+          ),
         ],
       ),
     );
