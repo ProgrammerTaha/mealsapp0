@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app0/widgets/meal_item.dart';
+import '../module/meal.dart';
+import '../widgets/meal_item.dart';
 
 import '../dummy_data.dart';
 
@@ -11,30 +12,43 @@ class CategoryMealsScreen extends StatefulWidget {
 }
 
 class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
+  late String categoryTitle;
+  late List<Meal> displayMeals;
+
   @override
-  Widget build(BuildContext context) {
+  void didChangeDependencies() {
     final routArg = ModalRoute.of(context)?.settings.arguments as Map;
     final categoryId = routArg['id'];
-    final categoryTitle = routArg['title'];
-    final categoryMeal = DUMMY_MEALS.where((meal) {
+    categoryTitle = routArg['title'];
+    displayMeals = DUMMY_MEALS.where((meal) {
       return meal.categories.contains(categoryId);
     }).toList();
+    super.didChangeDependencies();
+  }
+
+  void _removeMeal(String mealId) {
+    setState(() => displayMeals.removeWhere((meal) => meal.id == mealId));
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('$categoryTitle'),
       ),
       body: ListView.builder(
-        itemCount: categoryMeal.length,
+        itemCount: displayMeals.length,
         itemBuilder: (context, index) {
           return MealItem(
-            id: categoryMeal[index].id,
-            imageUrl: categoryMeal[index].imageUrl,
-            title: categoryMeal[index].title,
-            duration: categoryMeal[index].duration,
-            complexity: categoryMeal[index].complexity,
-            affordability: categoryMeal[index].affordability,
-            ingredients: categoryMeal[index].ingredients,
-            steps: categoryMeal[index].steps,
+            id: displayMeals[index].id,
+            imageUrl: displayMeals[index].imageUrl,
+            title: displayMeals[index].title,
+            duration: displayMeals[index].duration,
+            complexity: displayMeals[index].complexity,
+            affordability: displayMeals[index].affordability,
+            ingredients: displayMeals[index].ingredients,
+            steps: displayMeals[index].steps,
+            removeItem: _removeMeal,
           );
         },
       ),
