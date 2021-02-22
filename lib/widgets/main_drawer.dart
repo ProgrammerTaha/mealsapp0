@@ -3,7 +3,11 @@ import '../screens/filters_screen.dart';
 import '../screens/tabs_screen.dart';
 
 class MainDrawer extends StatelessWidget {
-  Widget tilesOfDrawer(IconData icon, String title, tapHandler) {
+  Widget tilesOfDrawer(
+    IconData icon,
+    String title,
+    void Function()? tapHandler,
+  ) {
     return ListTile(
       leading: Icon(icon, size: 26),
       title: Text(
@@ -39,10 +43,16 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          tilesOfDrawer(Icons.restaurant, 'Meal',
-              () => Navigator.of(context).pushReplacementNamed(TabsScreen.routName)),
-          tilesOfDrawer(Icons.settings, 'filters',
-              () => Navigator.of(context).pushReplacementNamed(FiltersScreen.routName)),
+          tilesOfDrawer(
+              Icons.restaurant,
+              'Meal',
+              () => Navigator.of(context)
+                  .pushReplacementNamed(TabsScreen.routName)),
+          tilesOfDrawer(
+              Icons.settings,
+              'filters',
+              () => Navigator.of(context)
+                  .pushReplacementNamed(FiltersScreen.routName)),
         ],
       ),
     );
