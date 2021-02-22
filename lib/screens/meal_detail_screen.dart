@@ -43,7 +43,8 @@ class MealDetailsScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 300,
-              child: Image.network('${selectedMeal.imageUrl}', fit: BoxFit.cover),
+              child:
+                  Image.network('${selectedMeal.imageUrl}', fit: BoxFit.cover),
             ),
             title(context, 'ingredients'),
             list(ListView.builder(
