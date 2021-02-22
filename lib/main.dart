@@ -24,12 +24,28 @@ class _MyAppState extends State<MyApp> {
     'vegetarian': false,
   };
 
-  List<Meal> _availableMeal = DUMMY_MEALS;
+  List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> _favoriteMeals = [];
+
+  void _toggleFavorite(mealId) {
+    final existingIndex =
+        _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+    if (existingIndex >= 0) {
+      setState(() => _favoriteMeals.removeAt(existingIndex));
+    } else {
+      setState(() => _favoriteMeals
+          .add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId)));
+    }
+  }
+
+  bool _isMealFavorite(String id) {
+    return _favoriteMeals.any((meal) => meal.id == id);
+  }
 
   void _setFilters(Map<String, bool?> _filterData) {
     setState(() {
       _filters = _filterData;
-      _availableMeal = DUMMY_MEALS.where((meal) {
+      _availableMeals = DUMMY_MEALS.where((meal) {
         if (_filters['gluten'] == true && !meal.isGlutenFree) return false;
         if (_filters['lactose'] == true && !meal.isLactoseFree) return false;
         if (_filters['vegan'] == true && !meal.isVegan) return false;
@@ -65,12 +81,14 @@ class _MyAppState extends State<MyApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: {
-        TabsScreen.routName: (context) => TabsScreen(),
+        TabsScreen.routName: (context) => TabsScreen(_favoriteMeals),
         CategoriesScreen.routName: (context) => CategoriesScreen(),
-        FiltersScreen.routName: (context) => FiltersScreen(_filters,_setFilters),
+        FiltersScreen.routName: (context) =>
+            FiltersScreen(_filters, _setFilters),
         CategoryMealsScreen.routName: (context) =>
-            CategoryMealsScreen(_availableMeal),
-        MealDetailsScreen.routName: (context) => MealDetailsScreen(),
+            CategoryMealsScreen(_availableMeals),
+        MealDetailsScreen.routName: (context) =>
+            MealDetailsScreen(_toggleFavorite, _isMealFavorite),
       },
     );
   }

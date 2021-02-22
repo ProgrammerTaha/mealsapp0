@@ -11,7 +11,6 @@ class MealItem extends StatelessWidget {
   late final List ingredients;
   late final List steps;
   late final String id;
-  late final Function removeItem;
 
   MealItem({
     required this.id,
@@ -22,7 +21,6 @@ class MealItem extends StatelessWidget {
     required this.affordability,
     required this.ingredients,
     required this.steps,
-    required this.removeItem,
   });
 
   String? get complexityText {
@@ -58,8 +56,6 @@ class MealItem extends StatelessWidget {
         'ingredients': ingredients,
         'steps': steps,
         'imageUrl': imageUrl,
-      }).then((result) {
-        if (result != null) removeItem(result);
       });
 
   @override
