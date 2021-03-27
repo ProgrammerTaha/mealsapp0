@@ -1,22 +1,28 @@
-name: meal_app0
-description: A new Flutter project.
+name: recipes_app
+description: Flutter project about food recipes.
 publish_to: 'none'
 version: 1.0.0+1
 environment:
-  sdk: '>=2.12.0-259.9.beta <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+  cupertino_icons:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons:
+
+flutter_icons:
+  android: true
+#  ios: true
+  image_path: 'assets/images/recipe-icon-4.jpg'
+
 flutter:
   uses-material-design: true
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/recipe-icon-4.jpg
   fonts:
     - family: Raleway
       fonts:

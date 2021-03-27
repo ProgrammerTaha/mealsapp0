@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:meal_app0/dummy_data.dart';
+import '../dummy_data.dart';
 
 class MealDetailsScreen extends StatelessWidget {
   static final routName = '/MealDetailsScreen';
