@@ -23,7 +23,7 @@ const DUMMY_MEALS = const [
     title: 'Spaghetti with Tomato Sauce',
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
-    imageUrl: '../assets/images/1.jpg',
+    imageUrl: 'assets/images/1.jpg',
     duration: 20,
     ingredients: [
       '4 Tomatoes',
@@ -53,7 +53,7 @@ const DUMMY_MEALS = const [
     title: 'Toast Hawaii',
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
-    imageUrl: '../assets/images/2.jpg',
+    imageUrl: 'assets/images/2.jpg',
     duration: 10,
     ingredients: [
       '1 Slice White Bread',
@@ -78,7 +78,7 @@ const DUMMY_MEALS = const [
     title: 'Classic Hamburger',
     affordability: Affordability.Pricey,
     complexity: Complexity.Simple,
-    imageUrl: '../assets/images/3.jpg',
+    imageUrl: 'assets/images/3.jpg',
     duration: 45,
     ingredients: [
       '300g Cattle Hack',
@@ -106,7 +106,7 @@ const DUMMY_MEALS = const [
     title: 'Wiener Schnitzel',
     affordability: Affordability.Luxurious,
     complexity: Complexity.Challenging,
-    imageUrl: '../assets/images/4.jpg',
+    imageUrl: 'assets/images/4.jpg',
     duration: 60,
     ingredients: [
       '8 Veal Cutlets',
@@ -142,7 +142,7 @@ const DUMMY_MEALS = const [
     title: 'Salad with Smoked Salmon',
     affordability: Affordability.Luxurious,
     complexity: Complexity.Simple,
-    imageUrl: '../assets/images/5.jpg',
+    imageUrl: 'assets/images/5.jpg',
     duration: 15,
     ingredients: [
       'Arugula',
@@ -173,7 +173,7 @@ const DUMMY_MEALS = const [
     title: 'Delicious Orange Mousse',
     affordability: Affordability.Affordable,
     complexity: Complexity.Hard,
-    imageUrl: '../assets/images/6.jpg',
+    imageUrl: 'assets/images/6.jpg',
     duration: 240,
     ingredients: [
       '4 Sheets of Gelatine',
@@ -205,7 +205,7 @@ const DUMMY_MEALS = const [
     title: 'Pancakes',
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
-    imageUrl: '../assets/images/7.jpg',
+    imageUrl: 'assets/images/7.jpg',
     duration: 20,
     ingredients: [
       '1 1/2 Cups all-purpose Flour',
@@ -233,7 +233,7 @@ const DUMMY_MEALS = const [
     title: 'Creamy Indian Chicken Curry',
     affordability: Affordability.Pricey,
     complexity: Complexity.Challenging,
-    imageUrl: '../assets/images/8.jpg',
+    imageUrl: 'assets/images/8.jpg',
     duration: 35,
     ingredients: [
       '4 Chicken Breasts',
@@ -263,7 +263,7 @@ const DUMMY_MEALS = const [
     title: 'Chocolate Souffle',
     affordability: Affordability.Affordable,
     complexity: Complexity.Hard,
-    imageUrl: '../assets/images/9.jpg',
+    imageUrl: 'assets/images/9.jpg',
     duration: 45,
     ingredients: [
       '1 Teaspoon melted Butter',
@@ -309,7 +309,7 @@ const DUMMY_MEALS = const [
     title: 'Asparagus Salad with Cherry Tomatoes',
     affordability: Affordability.Luxurious,
     complexity: Complexity.Simple,
-    imageUrl: '../assets/images/10.jpg',
+    imageUrl: 'assets/images/10.jpg',
     duration: 30,
     ingredients: [
       'White and Green Asparagus',
