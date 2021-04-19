@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipes_app/providers/meal_provider.dart';
 import '../module/meal.dart';
 import '../widgets/meal_item.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
   static final routName = '/CategoryMealsScreen';
-  late final List<Meal> availableMeal;
-  CategoryMealsScreen(this.availableMeal);
+
   @override
   _CategoryMealsScreenState createState() => _CategoryMealsScreenState();
 }
@@ -16,15 +17,16 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
 
   @override
   void didChangeDependencies() {
+    final List<Meal> availableMeal =
+        Provider.of<MealProvider>(context).availableMeals;
     final routArg = ModalRoute.of(context)?.settings.arguments as Map;
     final categoryId = routArg['id'];
     categoryTitle = routArg['title'];
-    displayMeals = widget.availableMeal.where((meal) {
+    displayMeals = availableMeal.where((meal) {
       return meal.categories.contains(categoryId);
     }).toList();
     super.didChangeDependencies();
   }
-
 
   @override
   Widget build(BuildContext context) {

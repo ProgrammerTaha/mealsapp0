@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipes_app/providers/meal_provider.dart';
 import '../widgets/main_drawer.dart';
 import 'tabs_screen.dart';
 
 class FiltersScreen extends StatefulWidget {
   static final routName = '/FiltersScreen';
-  late final saveFilters;
-  final Map<String, bool?> currentFilters;
-  FiltersScreen(this.currentFilters,this.saveFilters);
-
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
@@ -19,11 +17,14 @@ class _FiltersScreenState extends State<FiltersScreen> {
   bool? _vegetarian = false;
 
   @override
-  initState(){
-     _glutenFree = widget.currentFilters['gluten'];
-     _lactoseFree = widget.currentFilters['lactose'];
-     _vegan = widget.currentFilters['vegan'];
-     _vegetarian = widget.currentFilters['vegetarian'];
+  initState() {
+    final Map<String, bool?> currentFilters =
+        Provider.of<MealProvider>(context).filters;
+
+    _glutenFree = currentFilters['gluten'];
+    _lactoseFree = currentFilters['lactose'];
+    _vegan = currentFilters['vegan'];
+    _vegetarian = currentFilters['vegetarian'];
     super.initState();
   }
 
@@ -56,7 +57,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 'vegan': _vegan,
                 'vegetarian': _vegetarian,
               };
-              widget.saveFilters(selectedFilters);
+              Provider.of<MealProvider>(context).setFilters(selectedFilters);
               Navigator.of(context).popAndPushNamed(TabsScreen.routName);
             },
             icon: Icon(Icons.save),

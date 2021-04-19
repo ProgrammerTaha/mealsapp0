@@ -6,10 +6,6 @@ import '../screens/favorites_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   static final routName = '/';
-  final List<Meal> favoriteMeals;
-
-  TabsScreen(this.favoriteMeals);
-
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
@@ -20,7 +16,7 @@ class _TabsScreenState extends State<TabsScreen> {
   initState() {
     _pages = [
       {'page': CategoriesScreen(), 'title': 'Categories'},
-      {'page': FavoriteScreen(widget.favoriteMeals), 'title': 'Your Favorites'},
+      {'page': FavoriteScreen(), 'title': 'Your Favorites'},
     ];
     super.initState();
   }
