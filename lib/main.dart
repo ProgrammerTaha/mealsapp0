@@ -26,19 +26,14 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.amber,
         canvasColor: Color.fromRGBO(255, 254, 229, 1),
         textTheme: ThemeData.light().textTheme.copyWith(
-              bodyText1: TextStyle(
-                color: Color.fromRGBO(20, 50, 50, 1),
-              ),
-              bodyText2: TextStyle(
-                color: Color.fromRGBO(20, 50, 50, 1),
-              ),
-              headline6: TextStyle(
-                color: Color.fromRGBO(20, 50, 50, 1),
-                fontSize: 20,
-                fontFamily: 'RobotoCondensed',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            bodyText1: TextStyle(color: Color.fromRGBO(20, 50, 50, 1)),
+            bodyText2: TextStyle(color: Color.fromRGBO(20, 50, 50, 1)),
+            headline6: TextStyle(
+              color: Color.fromRGBO(20, 50, 50, 1),
+              fontSize: 20,
+              fontFamily: 'RobotoCondensed',
+              fontWeight: FontWeight.bold,
+            )),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: {

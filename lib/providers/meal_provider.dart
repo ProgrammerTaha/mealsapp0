@@ -14,18 +14,19 @@ class MealProvider with ChangeNotifier {
   List<Meal> availableMeals = DUMMY_MEALS;
   List<Meal> favoriteMeals = [];
 
-  void toggleFavorite(mealId) {
+  bool isMealFavorite= false;
+   toggleFavorite(mealId) {
     final existingIndex = favoriteMeals.indexWhere((meal) => meal.id == mealId);
     if (existingIndex >= 0) {
       favoriteMeals.removeAt(existingIndex);
     } else {
       favoriteMeals.add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId));
     }
+    isMealFavorite = favoriteMeals.any((meal) => meal.id == mealId);
+    notifyListeners();
   }
 
-  bool isMealFavorite(String id) {
-    return favoriteMeals.any((meal) => meal.id == id);
-  }
+
 
   void setFilters(Map<String, bool?> filterData) {
     filters = filterData;

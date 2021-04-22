@@ -6,7 +6,6 @@ import '../dummy_data.dart';
 
 class MealDetailsScreen extends StatelessWidget {
   static final routName = '/MealDetailsScreen';
-
   Widget title(BuildContext context, String title) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -45,8 +44,7 @@ class MealDetailsScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 300,
-              child:
-                  Image.network('${selectedMeal.imageUrl}', fit: BoxFit.cover),
+              child: Image.asset('${selectedMeal.imageUrl}', fit: BoxFit.cover),
             ),
             title(context, 'ingredients'),
             list(ListView.builder(
@@ -86,12 +84,18 @@ class MealDetailsScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            Provider.of<MealProvider>(context).toggleFavorite(routeArg['id']),
+        onPressed: () => Provider.of<MealProvider>(
+          context,
+          listen: false,
+        ).toggleFavorite(routeArg['id']),
         child: Icon(
-            Provider.of<MealProvider>(context).isMealFavorite(routeArg['id'])
-                ? Icons.star
-                : Icons.star_border),
+          Provider.of<MealProvider>(
+            context,
+            listen: true,
+          ).isMealFavorite
+              ? Icons.star
+              : Icons.star_border,
+        ),
       ),
     );
   }
