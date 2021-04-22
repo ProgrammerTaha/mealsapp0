@@ -28,8 +28,7 @@ class MealProvider with ChangeNotifier {
 
 
 
-  void setFilters(Map<String, bool?> filterData) {
-    filters = filterData;
+  void setFilters() {
     availableMeals = DUMMY_MEALS.where((meal) {
       if (filters['gluten'] == true && !meal.isGlutenFree) return false;
       if (filters['lactose'] == true && !meal.isLactoseFree) return false;
@@ -37,5 +36,6 @@ class MealProvider with ChangeNotifier {
       if (filters['vegetarian'] == true && !meal.isVegetarian) return false;
       return true;
     }).toList();
+    notifyListeners();
   }
 }

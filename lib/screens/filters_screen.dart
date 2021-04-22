@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes_app/providers/meal_provider.dart';
 import '../widgets/main_drawer.dart';
-import 'tabs_screen.dart';
 
 class FiltersScreen extends StatefulWidget {
   static final routName = '/FiltersScreen';
@@ -11,59 +10,13 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  bool? _glutenFree = false;
-  bool? _lactoseFree = false;
-  bool? _vegan = false;
-  bool? _vegetarian = false;
-
-  @override
-  initState() {
-    final Map<String, bool?> currentFilters =
-        Provider.of<MealProvider>(context).filters;
-
-    _glutenFree = currentFilters['gluten'];
-    _lactoseFree = currentFilters['lactose'];
-    _vegan = currentFilters['vegan'];
-    _vegetarian = currentFilters['vegetarian'];
-    super.initState();
-  }
-
-  Widget switchButtonLine(
-    String title,
-    String subtitle,
-    bool identifier,
-    void Function(bool)? switchHandler,
-  ) {
-    return SwitchListTile(
-      title: Text(title),
-      subtitle: Text(subtitle),
-      value: identifier,
-      onChanged: switchHandler,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final Map<String, bool?> currentFilters =
+        Provider.of<MealProvider>(context).filters;
     return Scaffold(
       drawer: MainDrawer(),
-      appBar: AppBar(
-        title: Text('Filters'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              final Map<String, bool?> selectedFilters = {
-                'gluten': _glutenFree,
-                'lactose': _lactoseFree,
-                'vegan': _vegan,
-                'vegetarian': _vegetarian,
-              };
-              Provider.of<MealProvider>(context).setFilters(selectedFilters);
-              Navigator.of(context).popAndPushNamed(TabsScreen.routName);
-            },
-            icon: Icon(Icons.save),
-          ),
-        ],
-      ),
+      appBar: AppBar(title: Text('Filters')),
       body: Column(
         children: <Widget>[
           Container(
@@ -76,29 +29,45 @@ class _FiltersScreenState extends State<FiltersScreen> {
           Expanded(
             child: ListView(
               children: <Widget>[
-                switchButtonLine(
-                  'Gluten-Free',
-                  'only include Gluten-Free meals',
-                  _glutenFree!,
-                  (bool val) => setState(() => _glutenFree = val),
+                SwitchListTile(
+                  title: Text('Gluten-Free'),
+                  subtitle: Text('only include Gluten-Free meals'),
+                  value: currentFilters['gluten']!,
+                  onChanged: (bool val) {
+                    setState(() => currentFilters['gluten'] = val);
+                    Provider.of<MealProvider>(context, listen: false)
+                        .setFilters();
+                  },
                 ),
-                switchButtonLine(
-                  'Lactose-Free',
-                  'only include Lactose-Free meals',
-                  _lactoseFree!,
-                  (bool val) => setState(() => _lactoseFree = val),
+                SwitchListTile(
+                  title: Text('Lactose-Free'),
+                  subtitle: Text('only include Lactose-Free meals'),
+                  value: currentFilters['lactose']!,
+                  onChanged: (bool val) {
+                    setState(() => currentFilters['lactose'] = val);
+                    Provider.of<MealProvider>(context, listen: false)
+                        .setFilters();
+                  },
                 ),
-                switchButtonLine(
-                  'Vegan',
-                  'only include Vegan meals',
-                  _vegan!,
-                  (bool val) => setState(() => _vegan = val),
+                SwitchListTile(
+                  title: Text('Vegan'),
+                  subtitle: Text('only include Vegan meals'),
+                  value: currentFilters['vegan']!,
+                  onChanged: (bool val) {
+                    setState(() => currentFilters['vegan'] = val);
+                    Provider.of<MealProvider>(context, listen: false)
+                        .setFilters();
+                  },
                 ),
-                switchButtonLine(
-                  'Vegetarian',
-                  'only include Vegetarian meals',
-                  _vegetarian!,
-                  (bool val) => setState(() => _vegetarian = val),
+                SwitchListTile(
+                  title: Text('Vegetarian'),
+                  subtitle: Text('only include Vegetarian meals'),
+                  value: currentFilters['vegetarian']!,
+                  onChanged: (bool val) {
+                    setState(() => currentFilters['vegetarian'] = val);
+                    Provider.of<MealProvider>(context, listen: false)
+                        .setFilters();
+                  },
                 ),
               ],
             ),
