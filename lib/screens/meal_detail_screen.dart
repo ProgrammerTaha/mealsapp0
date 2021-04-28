@@ -92,7 +92,7 @@ class MealDetailsScreen extends StatelessWidget {
           Provider.of<MealProvider>(
             context,
             listen: true,
-          ).isMealFavorite
+          ).isFavorite(routeArg['id'])
               ? Icons.star
               : Icons.star_border,
         ),

@@ -8,7 +8,14 @@ import 'screens/filters_screen.dart';
 import 'screens/meal_detail_screen.dart';
 import 'screens/tabs_screen.dart';
 
-void main() => runApp(
+void main() =>
+// these lines for clear the shared preferences
+/*
+   WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.clear();
+ */
+    runApp(
       ChangeNotifierProvider<MealProvider>(
         create: (ctx) => MealProvider(),
         child: MyApp(),
@@ -21,6 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+/*
       theme: ThemeData(
         primarySwatch: Colors.pink,
         accentColor: Colors.amber,
@@ -36,6 +44,9 @@ class MyApp extends StatelessWidget {
             )),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+ */
+      theme: ThemeData.dark(),
+      themeMode: ThemeMode.dark,
       routes: {
         TabsScreen.routName: (context) => TabsScreen(),
         CategoriesScreen.routName: (context) => CategoriesScreen(),
