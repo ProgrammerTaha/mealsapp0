@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes_app/providers/meal_provider.dart';
 import '../dummy_data.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class MealDetailsScreen extends StatelessWidget {
   static final routName = '/MealDetailsScreen';
@@ -32,8 +33,12 @@ class MealDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final routeArg = ModalRoute.of(context)?.settings.arguments as Map;
+
     final selectedMeal =
         DUMMY_MEALS.firstWhere((meal) => meal.id == routeArg['id']);
+
+    var accentColor = Theme.of(context).accentColor;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(routeArg['title']),
@@ -51,11 +56,16 @@ class MealDetailsScreen extends StatelessWidget {
               itemBuilder: (context, index) => Padding(
                 padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 child: Card(
-                  color: Theme.of(context).accentColor,
+                  color: accentColor,
                   child: Text(
                     '${routeArg["ingredients"][index]}',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: useWhiteForeground(accentColor)
+                          ? Colors.white
+                          : Colors.black,
+                    ),
                   ),
                 ),
               ),
@@ -72,7 +82,10 @@ class MealDetailsScreen extends StatelessWidget {
                     title: Text(
                       '${routeArg["steps"][index]}',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                   Divider(),

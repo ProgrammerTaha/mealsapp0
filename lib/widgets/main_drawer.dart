@@ -7,12 +7,18 @@ class MainDrawer extends StatelessWidget {
     IconData icon,
     String title,
     void Function()? tapHandler,
+    BuildContext context,
   ) {
     return ListTile(
-      leading: Icon(icon, size: 26),
+      leading: Icon(
+        icon,
+        size: 26,
+        color: Theme.of(context).buttonColor,
+      ),
       title: Text(
         title,
         style: TextStyle(
+          color: Theme.of(context).textTheme.bodyText1!.color,
           fontSize: 24,
           fontFamily: 'RobotoCondensed',
           fontWeight: FontWeight.bold,
@@ -25,6 +31,7 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      elevation: 0,
       child: Column(
         children: <Widget>[
           Container(
@@ -44,15 +51,19 @@ class MainDrawer extends StatelessWidget {
           ),
           SizedBox(height: 20),
           tilesOfDrawer(
-              Icons.restaurant,
-              'Meal',
-              () => Navigator.of(context)
-                  .pushReplacementNamed(TabsScreen.routName)),
+            Icons.restaurant,
+            'Meal',
+            () =>
+                Navigator.of(context).pushReplacementNamed(TabsScreen.routName),
+            context,
+          ),
           tilesOfDrawer(
-              Icons.settings,
-              'filters',
-              () => Navigator.of(context)
-                  .pushReplacementNamed(FiltersScreen.routName)),
+            Icons.settings,
+            'filters',
+            () => Navigator.of(context)
+                .pushReplacementNamed(FiltersScreen.routName),
+            context,
+          ),
         ],
       ),
     );
