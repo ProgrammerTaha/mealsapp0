@@ -65,7 +65,7 @@ class MealProvider with ChangeNotifier {
     filters['vegan'] = prefs.getBool('vegan') ?? false;
     filters['vegetarian'] = prefs.getBool('vegetarian') ?? false;
 
-    prefsMealId = prefs.getStringList('prefsId')!;
+    prefsMealId = prefs.getStringList('prefsId') ?? [];
 
     for (var mealId in prefsMealId) {
       final existingIndex =

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes_app/providers/meal_provider.dart';
+import 'package:recipes_app/providers/theme_provider.dart';
 import '../widgets/main_drawer.dart';
 import '../screens/categories_screen.dart';
 import '../screens/favorites_screen.dart';
@@ -16,6 +17,8 @@ class _TabsScreenState extends State<TabsScreen> {
 
   initState() {
     Provider.of<MealProvider>(context, listen: false).getFilters();
+    Provider.of<ThemeProvider>(context, listen: false).getThemeText();
+    Provider.of<ThemeProvider>(context, listen: false).getColorsHashCode();
     _pages = [
       {'page': CategoriesScreen(), 'title': 'Categories'},
       {'page': FavoriteScreen(), 'title': 'Your Favorites'},
