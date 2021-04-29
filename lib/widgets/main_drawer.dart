@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipes_app/screens/themes_screen.dart';
 import '../screens/filters_screen.dart';
 import '../screens/tabs_screen.dart';
 
@@ -62,6 +63,13 @@ class MainDrawer extends StatelessWidget {
             'filters',
             () => Navigator.of(context)
                 .pushReplacementNamed(FiltersScreen.routName),
+            context,
+          ),
+          tilesOfDrawer(
+            Icons.color_lens,
+            'Themes',
+            () => Navigator.of(context)
+                .pushReplacementNamed(ThemesScreen.routName),
             context,
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes_app/providers/meal_provider.dart';
+import 'package:recipes_app/providers/theme_provider.dart';
 import '../widgets/main_drawer.dart';
 
 class FiltersScreen extends StatefulWidget {
@@ -10,6 +11,31 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
+  SwitchListTile buildSwitchListTile(
+    String title,
+    String subtitle,
+    String value,
+    Map<String, bool?> currentFilters,
+    BuildContext context,
+  ) {
+    return SwitchListTile(
+      title: Text(title),
+      subtitle: Text(subtitle),
+      inactiveThumbColor:
+          Provider.of<ThemeProvider>(context).tm == ThemeMode.dark
+              ? Colors.black
+              : null,
+              activeColor: Provider.of<ThemeProvider>(context).tm == ThemeMode.dark
+              ? Colors.white
+              : null,
+      value: currentFilters[value]!,
+      onChanged: (bool val) {
+        setState(() => currentFilters[value] = val);
+        Provider.of<MealProvider>(context, listen: false).setFilters();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final Map<String, bool?> currentFilters =
@@ -29,45 +55,33 @@ class _FiltersScreenState extends State<FiltersScreen> {
           Expanded(
             child: ListView(
               children: <Widget>[
-                SwitchListTile(
-                  title: Text('Gluten-Free'),
-                  subtitle: Text('only include Gluten-Free meals'),
-                  value: currentFilters['gluten']!,
-                  onChanged: (bool val) {
-                    setState(() => currentFilters['gluten'] = val);
-                    Provider.of<MealProvider>(context, listen: false)
-                        .setFilters();
-                  },
+                buildSwitchListTile(
+                  'Gluten-Free',
+                  'only include Gluten-Free meals',
+                  'gluten',
+                  currentFilters,
+                  context,
                 ),
-                SwitchListTile(
-                  title: Text('Lactose-Free'),
-                  subtitle: Text('only include Lactose-Free meals'),
-                  value: currentFilters['lactose']!,
-                  onChanged: (bool val) {
-                    setState(() => currentFilters['lactose'] = val);
-                    Provider.of<MealProvider>(context, listen: false)
-                        .setFilters();
-                  },
+                buildSwitchListTile(
+                  'Lactose-Free',
+                  'only include Lactose-Free meals',
+                  'lactose',
+                  currentFilters,
+                  context,
                 ),
-                SwitchListTile(
-                  title: Text('Vegan'),
-                  subtitle: Text('only include Vegan meals'),
-                  value: currentFilters['vegan']!,
-                  onChanged: (bool val) {
-                    setState(() => currentFilters['vegan'] = val);
-                    Provider.of<MealProvider>(context, listen: false)
-                        .setFilters();
-                  },
+                buildSwitchListTile(
+                  'Vegan',
+                  'only include Vegan meals',
+                  'vegan',
+                  currentFilters,
+                  context,
                 ),
-                SwitchListTile(
-                  title: Text('Vegetarian'),
-                  subtitle: Text('only include Vegetarian meals'),
-                  value: currentFilters['vegetarian']!,
-                  onChanged: (bool val) {
-                    setState(() => currentFilters['vegetarian'] = val);
-                    Provider.of<MealProvider>(context, listen: false)
-                        .setFilters();
-                  },
+                buildSwitchListTile(
+                  'Vegetarian',
+                  'only include Vegetarian meals',
+                  'vegetarian',
+                  currentFilters,
+                  context,
                 ),
               ],
             ),
