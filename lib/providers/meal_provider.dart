@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipes_app/module/category.dart';
 import 'package:recipes_app/module/meal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,6 +16,7 @@ class MealProvider with ChangeNotifier {
   List<Meal> availableMeals = DUMMY_MEALS;
   List<Meal> favoriteMeals = [];
   List<String> prefsMealId = [];
+  List<Category> availableCategories = DUMMY_CATEGORIES;
 
   toggleFavorite(mealId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -46,6 +48,21 @@ class MealProvider with ChangeNotifier {
       if (filters['vegetarian'] == true && !meal.isVegetarian) return false;
       return true;
     }).toList();
+
+    List<Category> ac = [];
+
+    availableMeals.forEach((meal) {
+      meal.categories.forEach((catId) {
+        availableCategories.forEach((cat) {
+          if (cat.id == catId) {
+            if (!ac.any((cat) => cat.id == catId)) {
+              ac.add(cat);
+            }
+          }
+        });
+      });
+    });
+    availableCategories = ac;
 
     notifyListeners();
 
